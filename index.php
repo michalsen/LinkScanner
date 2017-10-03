@@ -32,12 +32,18 @@ foreach ($contents as $content)
     $html = $content->find('a')[0];
 
     if (!preg_match("/[A-Za-z]/", $html->text)) {
-      print $html->text . "\n";
+      //print $html->text . "\n";
       $fail++;
     }
   }
 
-  print 'fail: ' .  $fail . "\n";
+
+  //print 'fail: ' .  $fail . "\n";
+  if ($fail > 0) {
+    // print $url . "\n";
+    // print $html . "\n";
+    mail('', 'Missing Title Data', $url . "\n" . $html);
+  }
 
 }
 
