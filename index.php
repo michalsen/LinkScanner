@@ -42,7 +42,12 @@ foreach ($contents as $content)
   if ($fail > 0) {
     // print $url . "\n";
     // print $html . "\n";
-    mail('', 'Missing Title Data', $url . "\n" . $html);
+    try {
+      mail('', 'Missing Title Data', $url . "\n" . $html);
+     catch { (Exception $e)
+      var_dump($e);
+     }
+
   }
 
 }
