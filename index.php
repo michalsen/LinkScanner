@@ -43,8 +43,18 @@ foreach ($contents as $content)
     // print $url . "\n";
     // print $html . "\n";
     try {
-      mail('', 'Missing Title Data', $url . "\n" . $html);
-     catch { (Exception $e)
+       print $url . "\n";
+       print $html . "\n";
+
+    $to      = '';
+    $subject = 'Missing Title Data';
+    $message = $url;
+    $headers = 'From: testing@straightnorth.com' . "\r\n" .
+    'Reply-To: testing@straightnorth.com' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+       mail($to, $subject, $message, $headers);
+     } catch  (Exception $e) {
       var_dump($e);
      }
 

@@ -1,9 +1,9 @@
 {
-    "name": "emichalsen/scanner",
+    "name": "root/link-scanner",
     "authors": [
         {
             "name": "Eric Michalsen",
-            "email": "eric.michalsen@gmail.com"
+            "email": "emichalsen@straightnorth.com"
         }
     ],
     "require": {
