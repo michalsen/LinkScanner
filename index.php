@@ -8,7 +8,7 @@ use PHPHtmlParser\Dom;
 $urls = ['http://www.natomassmiles.com/about-us/our-team/',
          'http://www.royalreportingservices.com/our-story/our-team/'];
 
-
+$fails = [];
 foreach ($urls as $url) {
 
 
@@ -40,26 +40,30 @@ foreach ($contents as $content)
 
   //print 'fail: ' .  $fail . "\n";
   if ($fail > 0) {
-    // print $url . "\n";
-    // print $html . "\n";
-    try {
-       print $url . "\n";
-       print $html . "\n";
-
-    $to      = '';
-    $subject = 'Missing Title Data';
-    $message = $url;
-    $headers = 'From: testing@straightnorth.com' . "\r\n" .
-    'Reply-To: testing@straightnorth.com' . "\r\n" .
-    'X-Mailer: PHP/' . phpversion();
-
-       mail($to, $subject, $message, $headers);
-     } catch  (Exception $e) {
-      var_dump($e);
-     }
-
+    array_push($fails, $url);
   }
 
 }
 
 
+if (count($fails) > 0) {
+  $failList = '';
+
+  foreach ($fails as $row) {
+    $failList .= $row . "\n";
+  }
+
+    try {
+      $to      = '';
+      $subject = 'Missing Title Data';
+      $message = $failList;
+      $headers = 'From: testing@straightnorth.com' . "\r\n" .
+      'Reply-To: testing@straightnorth.com' . "\r\n" .
+      'X-Mailer: PHP/' . phpversion();
+
+       mail($to, $subject, $message, $headers);
+
+     } catch  (Exception $e) {
+      var_dump($e);
+     }
+}
