@@ -5,12 +5,8 @@ require('vendor/autoload.php');
 use PHPHtmlParser\Dom;
 
 
-$client = new Maknz\Slack\Client('');
-
-
-
-
-
+$hook_url = file_get_contents('.hook');
+$slackClient = new Maknz\Slack\Client($hook_url);
 
 $urls = ['http://www.natomassmiles.com/about-us/our-team/',
          'http://www.royalreportingservices.com/our-story/our-team/'];
@@ -61,15 +57,15 @@ if (count($fails) > 0) {
   }
 
     try {
-      $to      = '';
-      $subject = 'Missing Title Data';
-      $message = $failList;
-      $headers = 'From: testing@straightnorth.com' . "\r\n" .
-      'Reply-To: testing@straightnorth.com' . "\r\n" .
-      'X-Mailer: PHP/' . phpversion();
+      $slackClient->send($failList);
 
-       $client->send($message);
-       mail($to, $subject, $message, $headers);
+      // $to      = '';
+      // $subject = 'Missing Title Data';
+      // $message = $failList;
+      // $headers = 'From: testing@straightnorth.com' . "\r\n" .
+      // 'Reply-To: testing@straightnorth.com' . "\r\n" .
+      // 'X-Mailer: PHP/' . phpversion();
+      // mail($to, $subject, $message, $headers);
 
      } catch  (Exception $e) {
       var_dump($e);
