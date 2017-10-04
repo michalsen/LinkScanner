@@ -6,7 +6,9 @@ use PHPHtmlParser\Dom;
 
 
 $hook_url = file_get_contents('.hook');
-$slackClient = new Maknz\Slack\Client($hook_url);
+$settings = ['channel' => '#gonorthsites'];
+
+$slackClient = new Maknz\Slack\Client(trim($hook_url), $settings);
 
 $urls = ['http://www.natomassmiles.com/about-us/our-team/',
          'http://www.royalreportingservices.com/our-story/our-team/'];
