@@ -5,6 +5,13 @@ require('vendor/autoload.php');
 use PHPHtmlParser\Dom;
 
 
+$client = new Maknz\Slack\Client('');
+
+
+
+
+
+
 $urls = ['http://www.natomassmiles.com/about-us/our-team/',
          'http://www.royalreportingservices.com/our-story/our-team/'];
 
@@ -61,6 +68,7 @@ if (count($fails) > 0) {
       'Reply-To: testing@straightnorth.com' . "\r\n" .
       'X-Mailer: PHP/' . phpversion();
 
+       $client->send($message);
        mail($to, $subject, $message, $headers);
 
      } catch  (Exception $e) {
