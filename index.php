@@ -15,7 +15,7 @@ if ($env !='test') {
   include '.urls.php';
 }
  else {
-  $urls = ['http://www.natomassmiles.com/about-us/our-team/'],
+  $urls = ['http://www.natomassmiles.com/about-us/our-team/'];
  }
 
 $fails = [];
