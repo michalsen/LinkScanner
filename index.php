@@ -5,13 +5,10 @@ require('vendor/autoload.php');
 use PHPHtmlParser\Dom;
 
 
-$hook_url = file_get_contents(getenv('SLACK_HOOK'));
-$settings = ['channel' => '#' . getenv('SLACK_CHANNEL')];
-
-$slackClient = new Maknz\Slack\Client(trim($hook_url), $settings);
-
-
 if ($env !='test') {
+  $hook_url = file_get_contents(getenv('SLACK_HOOK'));
+  $settings = ['channel' => '#' . getenv('SLACK_CHANNEL')];
+  $slackClient = new Maknz\Slack\Client(trim($hook_url), $settings);
   include '.urls.php';
 }
  else {
@@ -63,10 +60,11 @@ if (count($fails) > 0) {
 
     try {
       if ($env !='test') {
-              print 'found!';
+           $slackClient->send($failList);
+
         }
           else {
-             $slackClient->send($failList);
+             print 'found!';
           }
      } catch  (Exception $e) {
       var_dump($e);
