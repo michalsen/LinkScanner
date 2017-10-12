@@ -5,11 +5,13 @@ require('vendor/autoload.php');
 use PHPHtmlParser\Dom;
 
 
+$env = getenv('APP_ENV');
+
 if ($env !='test') {
-  $hook_url = file_get_contents(getenv('SLACK_HOOK'));
-  $settings = ['channel' => '#' . getenv('SLACK_CHANNEL')];
-  $slackClient = new Maknz\Slack\Client(trim($hook_url), $settings);
   include '.urls.php';
+  $settings = ['channel' => getenv('SLACK_CHANNEL')];
+  $slackClient = new Maknz\Slack\Client(trim(getenv('SLACK_HOOK')), $settings);
+
 }
  else {
   $urls = ['http://www.natomassmiles.com/about-us/our-team/'];
@@ -70,3 +72,4 @@ if (count($fails) > 0) {
       var_dump($e);
      }
 }
+

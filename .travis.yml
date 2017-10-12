@@ -18,7 +18,7 @@ script:
   - php index.php
 
 env:
-  - APP_ENV=test SLACK_HOOK=gonorthsites_testing
+  - APP_ENV=test SLACK_HOOK=#gonorthsites_testing
 
 after_script:
 - echo "Test!"
