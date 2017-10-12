@@ -72,4 +72,7 @@ if (count($fails) > 0) {
       var_dump($e);
      }
 }
+ else {
+  print 'All clear.';
+ }
 
