@@ -64,7 +64,11 @@ if (count($fails) > 0) {
 
   foreach ($fails as $row) {
     $failList .= $row . "\n";
+    }
   }
+    else {
+      $failList = 'All Clear.';
+   }
 
     try {
       if ($env !='test') {
@@ -77,13 +81,5 @@ if (count($fails) > 0) {
      } catch  (Exception $e) {
       var_dump($e);
      }
-}
- else {
-  if ($env !='test') {
-           $slackClient->send('All Clear.');
-        }
-          else {
-             print 'All Clear.';
-          }
- }
+
 
