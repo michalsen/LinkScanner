@@ -5,13 +5,18 @@ require('vendor/autoload.php');
 use PHPHtmlParser\Dom;
 
 
-$hook_url = file_get_contents('.hook');
-$settings = ['channel' => '#gonorthsites'];
+$hook_url = file_get_contents(getenv('SLACK_HOOK'));
+$settings = ['channel' => '#' . getenv('SLACK_CHANNEL')];
 
 $slackClient = new Maknz\Slack\Client(trim($hook_url), $settings);
 
-$urls = ['http://www.natomassmiles.com/about-us/our-team/',
-         'http://www.royalreportingservices.com/our-story/our-team/'];
+
+if ($env !='test') {
+  include '.urls.php';
+}
+ else {
+  $urls = ['http://www.natomassmiles.com/about-us/our-team/'],
+ }
 
 $fails = [];
 foreach ($urls as $url) {
@@ -37,13 +42,11 @@ foreach ($contents as $content)
     $html = $content->find('a')[0];
 
     if (!preg_match("/[A-Za-z]/", $html->text)) {
-      //print $html->text . "\n";
       $fail++;
     }
   }
 
 
-  //print 'fail: ' .  $fail . "\n";
   if ($fail > 0) {
     array_push($fails, $url);
   }
@@ -59,16 +62,12 @@ if (count($fails) > 0) {
   }
 
     try {
-      $slackClient->send($failList);
-
-      // $to      = '';
-      // $subject = 'Missing Title Data';
-      // $message = $failList;
-      // $headers = 'From: testing@straightnorth.com' . "\r\n" .
-      // 'Reply-To: testing@straightnorth.com' . "\r\n" .
-      // 'X-Mailer: PHP/' . phpversion();
-      // mail($to, $subject, $message, $headers);
-
+      if ($env !='test') {
+              print 'found!';
+        }
+          else {
+             $slackClient->send($failList);
+          }
      } catch  (Exception $e) {
       var_dump($e);
      }

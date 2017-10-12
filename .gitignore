@@ -1,2 +1,4 @@
 /vendor/
 .hook
+.env*
+.urls.php
