@@ -73,6 +73,11 @@ if (count($fails) > 0) {
      }
 }
  else {
-  print 'All clear.';
+  if ($env !='test') {
+           $slackClient->send('All Clear.');
+        }
+          else {
+             print 'All Clear.';
+          }
  }
 
