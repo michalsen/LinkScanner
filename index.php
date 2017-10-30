@@ -1,4 +1,9 @@
 <?php
+/**
+ *  LinkScannerv1.0
+ *  Scans a series of pages provided in an array in .urls.php
+ *  and searches for specific content.
+ */
 
 
 require('vendor/autoload.php');
