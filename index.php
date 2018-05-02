@@ -20,7 +20,7 @@ if ($env !='test') {
   $slackClient = new Maknz\Slack\Client($slack['hook'], $settings);
 }
   else {
-    $urls = ['http://www.natomassmiles.com/about-us/our-team/'];
+    $urls = ['http://www.awardconcepts.net/about-us/staff/'];
 }
 
 $fails = [];
